@@ -1,10 +1,11 @@
-import DeviceDetector from 'device-detector-js'
 import type { Request } from 'express'
 import { lookup } from 'geoip-lite'
 
 import type { SessionMetadata } from '../types/session-metadata.types'
 
 import { IS_DEV_ENV } from './is-dev.util'
+
+import DeviceDetector = require('device-detector-js')
 
 export function getSessionMetadata(
 	req: Request,
@@ -25,7 +26,7 @@ export function getSessionMetadata(
 	return {
 		location: {
 			country: location.country || 'Неизвестно',
-			city: location.city,
+			city: location.city || 'Неизвестно',
 			latitude: location.ll[0] || 0,
 			longitude: location.ll[1] || 0
 		},
